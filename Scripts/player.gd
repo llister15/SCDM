@@ -1,8 +1,22 @@
-extends Actor
+extends KinematicBody2D
+
+# Charater Name
+var name_of_char: String = "Turtle1"
+# Character Movement
+var velo: Vector2 = Vector2.ZERO
+var gravity: int = 20
+var move_speed: int = 15
+var max_velo: int = 200
+var jump_force: int = 450
+# Character Stats
+var hp: int = 100
+
+func _physics_process(delta: float) -> void:
+	movement()
+	velo = move_and_slide(velo, Vector2.UP)
 
 # Getting input from user to add and subtract velocity values
 func movement():
-	var max_velo = 200
 	# Creating varibles for user Input
 	var left = Input.is_action_pressed("ui_left")
 	var right = Input.is_action_pressed("ui_right")
@@ -35,14 +49,7 @@ func movement():
 			$AnimatedSprite.play("Idle")
 	#jumping Section
 	if jump and is_on_floor():
-		is_jumping = true
 		velo.y -= jump_force
 	elif cancel_jump and !is_on_floor():
 		if velo.y < 0:
 			velo.y = 0
-	else:
-		is_jumping = false
-
-func _physics_process(delta: float) -> void:
-	movement()
-	velo = move_and_slide(velo, Vector2.UP)

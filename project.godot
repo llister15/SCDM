@@ -9,13 +9,13 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "KinematicBody2D",
-"class": "Actor",
+"base": "Node",
+"class": "weapons",
 "language": "GDScript",
-"path": "res://Scripts/Actor.gd"
+"path": "res://Scripts/Weapons.gd"
 } ]
 _global_script_class_icons={
-"Actor": "res://Sprites/Turtle.png"
+"weapons": "res://Sprites/Glock19.png"
 }
 
 [application]
