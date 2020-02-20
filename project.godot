@@ -21,8 +21,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Shell Combat DM"
-run/main_scene="res://Test Movement World.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://Scenes/Levels/Test Movement World.tscn"
+config/icon="res://Sprites/icon.png"
 
 [display]
 
@@ -70,9 +70,13 @@ jump={
 
 [layer_names]
 
+2d_render/layer_1="Player"
 2d_physics/layer_1="Player"
-2d_physics/layer_2="Enemies"
+2d_render/layer_2="Enemy"
+2d_physics/layer_2="Enemy"
+2d_render/layer_3="Items"
 2d_physics/layer_3="Items"
+2d_render/layer_4="World"
 2d_physics/layer_4="World"
 
 [rendering]

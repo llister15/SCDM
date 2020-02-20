@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="NewGame_button" type="Button"]
+margin_right = 80.0
+margin_bottom = 20.0
+flat = true
+align = 0
+
+[node name="Label" type="Label" parent="."]
+text = "New Game"
+valign = 1

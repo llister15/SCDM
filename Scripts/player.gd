@@ -1,15 +1,15 @@
 extends KinematicBody2D
 
 # Charater Name
-var name_of_char: String = "Turtle1"
+export var name_of_char: String = "Turtle1"
 # Character Movement
 var velo: Vector2 = Vector2.ZERO
-var gravity: int = 20
-var move_speed: int = 15
-var max_velo: int = 200
-var jump_force: int = 450
+export var gravity: int = 20
+export var move_speed: int = 15
+export var max_velo: int = 200
+export var jump_force: int = 450
 # Character Stats
-var hp: int = 100
+export var hp: int = 100
 
 func _physics_process(delta: float) -> void:
 	movement()
