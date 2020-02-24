@@ -4,10 +4,10 @@ extends KinematicBody2D
 export var name_of_char: String = "Turtle1"
 # Character Movement
 var velo: Vector2 = Vector2.ZERO
-export var gravity: int = 20
+export var gravity: int = 30
 export var move_speed: int = 40
 export var max_speed: int = 160
-export var jump_force: int = 450
+export var jump_force: int = 515
 var is_jumping: bool = false
 # Character Stats
 export var hp: int = 100
@@ -54,6 +54,6 @@ func movement():
 		velo.y -= jump_force
 	elif cancel_jump and !is_on_floor() and is_jumping == true:
 		if velo.y < 0:
-			velo.y += jump_force / 2
+			velo.y += jump_force / 4
 		else:
 			is_jumping = false
