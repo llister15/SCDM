@@ -10,8 +10,6 @@ export var jump_force: int = 515
 var is_jumping: bool = false
 # Character Stats
 export var hp: int = 100
-# Sounds
-var jumpsfx = AudioStreamPlayer.new();
 
 func _physics_process(delta: float) -> void:
 	movement()
@@ -28,7 +26,7 @@ func movement():
 	if left and !right:
 		# Animating the sprite
 		$AnimatedSprite.play("Run")
-		get_node("AnimatedSprite").set_flip_h(true)
+		$AnimatedSprite.set_flip_h(true)
 		# Applying the user input into movement
 		if velo.x < -max_speed:
 			velo.x = -max_speed
@@ -37,7 +35,7 @@ func movement():
 	if right and !left:
 		# Animating the sprite
 		$AnimatedSprite.play("Run")
-		get_node("AnimatedSprite").set_flip_h(false)
+		$AnimatedSprite.set_flip_h(false)
 		if velo.x > max_speed:
 			velo.x = max_speed
 		else:
@@ -53,9 +51,7 @@ func movement():
 	if jump and is_on_floor():
 		is_jumping = true
 		velo.y -= jump_force
-		self.add_child(jumpsfx);
-		jumpsfx.stream = load("res://Sounds/jumpsound.ogg");
-		jumpsfx.play();
+		$JumpSound.play()
 	elif cancel_jump and !is_on_floor() and is_jumping == true:
 		if velo.y < 0:
 			velo.y += jump_force / 4
