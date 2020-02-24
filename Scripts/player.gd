@@ -1,5 +1,4 @@
 extends KinematicBody2D
-
 # Charater Name
 export var name_of_char: String = "Turtle1"
 # Character Movement
@@ -11,6 +10,8 @@ export var jump_force: int = 515
 var is_jumping: bool = false
 # Character Stats
 export var hp: int = 100
+# Sounds
+var jumpsfx = AudioStreamPlayer.new();
 
 func _physics_process(delta: float) -> void:
 	movement()
@@ -52,6 +53,9 @@ func movement():
 	if jump and is_on_floor():
 		is_jumping = true
 		velo.y -= jump_force
+		self.add_child(jumpsfx);
+		jumpsfx.stream = load("res://Sounds/jumpsound.ogg");
+		jumpsfx.play();
 	elif cancel_jump and !is_on_floor() and is_jumping == true:
 		if velo.y < 0:
 			velo.y += jump_force / 4
