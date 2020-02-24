@@ -1,12 +1,11 @@
 extends KinematicBody2D
-
 # Charater Name
 export var name_of_char: String = "Turtle1"
 # Character Movement
 var velo: Vector2 = Vector2.ZERO
 export var gravity: int = 30
 export var move_speed: int = 40
-export var max_speed: int = 160
+export var max_speed: int = 200
 export var jump_force: int = 515
 var is_jumping: bool = false
 # Character Stats
@@ -55,5 +54,8 @@ func movement():
 	elif cancel_jump and !is_on_floor() and is_jumping == true:
 		if velo.y < 0:
 			velo.y += jump_force / 4
-		else:
-			is_jumping = false
+	if !jump and is_on_floor():
+		is_jumping = false
+	if is_jumping == true:
+		$AnimatedSprite.play("Jump")
+	print(is_jumping)
