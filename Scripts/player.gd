@@ -6,7 +6,7 @@ var velo: Vector2 = Vector2.ZERO
 export var gravity: int = 30
 export var move_speed: int = 40
 export var max_speed: int = 200
-export var jump_force: int = 515
+export var jump_force: int = 500
 var is_jumping: bool = false
 # Character Stats
 export var hp: int = 100
@@ -21,12 +21,10 @@ func movement():
 	var left = Input.is_action_pressed("ui_left")
 	var right = Input.is_action_pressed("ui_right")
 	var jump = Input.is_action_pressed("jump")
-	var cancel_jump = Input.is_action_just_released("jump")
 	# if statements to Apply Input into movement
 	if left and !right:
 		# Animating the sprite
-		$AnimatedSprite.play("Run")
-		$AnimatedSprite.set_flip_h(true)
+		pass ####
 		# Applying the user input into movement
 		if velo.x < -max_speed:
 			velo.x = -max_speed
@@ -34,15 +32,14 @@ func movement():
 			velo.x -= move_speed
 	if right and !left:
 		# Animating the sprite
-		$AnimatedSprite.play("Run")
-		$AnimatedSprite.set_flip_h(false)
+		pass ####
 		if velo.x > max_speed:
 			velo.x = max_speed
 		else:
 			velo.x += move_speed
 	elif !left and !right and !jump:
 		velo.x = lerp(velo.x, 0, 0.2)
-		$AnimatedSprite.play("Idle")
+		pass ####
 	# Applying gravity on player
 	velo.y += gravity
 	if velo.y > gravity * 2:
@@ -52,11 +49,7 @@ func movement():
 		is_jumping = true
 		velo.y -= jump_force
 		$JumpSound.play()
-	elif cancel_jump and !is_on_floor() and is_jumping == true:
-		if velo.y < 0:
-			velo.y += jump_force / 4
+	# Setting bool is_jumping back to false
 	if !jump and is_on_floor():
 		is_jumping = false
-	if jump:
-		$AnimatedSprite.play("Jump")
 	print(is_jumping)
