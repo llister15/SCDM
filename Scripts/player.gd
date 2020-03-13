@@ -20,7 +20,7 @@ func movement():
 	# Creating varibles for user Input
 	var left = Input.is_action_pressed("ui_left")
 	var right = Input.is_action_pressed("ui_right")
-	var jump = Input.is_action_just_pressed("jump")
+	var jump = Input.is_action_pressed("jump")
 	var cancel_jump = Input.is_action_just_released("jump")
 	# if statements to Apply Input into movement
 	if left and !right:
@@ -40,7 +40,7 @@ func movement():
 			velo.x = max_speed
 		else:
 			velo.x += move_speed
-	elif !left and !right:
+	elif !left and !right and !jump:
 		velo.x = lerp(velo.x, 0, 0.2)
 		$AnimatedSprite.play("Idle")
 	# Applying gravity on player
@@ -57,6 +57,6 @@ func movement():
 			velo.y += jump_force / 4
 	if !jump and is_on_floor():
 		is_jumping = false
-	if is_jumping == true:
+	if jump:
 		$AnimatedSprite.play("Jump")
 	print(is_jumping)
