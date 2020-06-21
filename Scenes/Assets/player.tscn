@@ -22,7 +22,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "Jump"
 length = 0.33
 tracks/0/type = "value"
@@ -41,6 +41,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=3]
 resource_name = "Run"
 length = 0.54
+loop = true
 step = 0.125
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -55,46 +56,46 @@ tracks/0/keys = {
 "values": [ 5, 6, 7, 8, 5 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=7]
+[sub_resource type="AnimationNodeAnimation" id=4]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=8]
+[sub_resource type="AnimationNodeAnimation" id=5]
 animation = "Jump"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=6]
 animation = "Run"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=7]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=8]
+priority = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=10]
+switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=11]
-priority = 2
+switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=12]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=13]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=14]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
-
-[sub_resource type="AnimationNodeStateMachine" id=5]
-states/Idle/node = SubResource( 7 )
+[sub_resource type="AnimationNodeStateMachine" id=13]
+states/Idle/node = SubResource( 4 )
 states/Idle/position = Vector2( 605, 176 )
-states/Jump/node = SubResource( 8 )
+states/Jump/node = SubResource( 5 )
 states/Jump/position = Vector2( 605, 292 )
-states/Run/node = SubResource( 9 )
+states/Run/node = SubResource( 6 )
 states/Run/position = Vector2( 814, 176 )
-transitions = [ "Idle", "Jump", SubResource( 10 ), "Idle", "Run", SubResource( 11 ), "Run", "Idle", SubResource( 12 ), "Jump", "Idle", SubResource( 13 ), "Jump", "Run", SubResource( 14 ), "Run", "Jump", SubResource( 15 ) ]
+transitions = [ "Idle", "Jump", SubResource( 7 ), "Idle", "Run", SubResource( 8 ), "Run", "Idle", SubResource( 9 ), "Jump", "Idle", SubResource( 10 ), "Jump", "Run", SubResource( 11 ), "Run", "Jump", SubResource( 12 ) ]
 start_node = "Idle"
 graph_offset = Vector2( 13, 91 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=6]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=14]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 9.32705, 15.077 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -106,21 +107,22 @@ position = Vector2( 0, -16.0084 )
 texture = ExtResource( 2 )
 vframes = 3
 hframes = 5
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 1 )
-anims/Jump = SubResource( 4 )
+anims/Jump = SubResource( 2 )
 anims/Run = SubResource( 3 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 5 )
+tree_root = SubResource( 13 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 6 )
+parameters/playback = SubResource( 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -15.133 )
-shape = SubResource( 2 )
+shape = SubResource( 15 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
