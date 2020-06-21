@@ -1,11 +1,98 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scripts/player.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/idle/Idle 00.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Animations/Sprite Sheet.png" type="Texture" id=2]
 [ext_resource path="res://Sounds/jumpsound.ogg" type="AudioStream" id=3]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "Idle"
+length = 0.85
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Jump"
+length = 0.33
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 10, 11 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Run"
+length = 0.54
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.125, 0.25, 0.375, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 6, 7, 8, 5 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "Jump"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+priority = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachine" id=5]
+states/Idle/node = SubResource( 7 )
+states/Idle/position = Vector2( 605, 176 )
+states/Jump/node = SubResource( 8 )
+states/Jump/position = Vector2( 605, 292 )
+states/Run/node = SubResource( 9 )
+states/Run/position = Vector2( 814, 176 )
+transitions = [ "Idle", "Jump", SubResource( 10 ), "Idle", "Run", SubResource( 11 ), "Run", "Idle", SubResource( 12 ), "Jump", "Idle", SubResource( 13 ), "Jump", "Run", SubResource( 14 ), "Run", "Jump", SubResource( 15 ) ]
+start_node = "Idle"
+graph_offset = Vector2( 13, 91 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=6]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 9.32705, 15.077 )
@@ -17,9 +104,19 @@ script = ExtResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -16.0084 )
 texture = ExtResource( 2 )
+vframes = 3
+hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Idle = SubResource( 3 )
+anims/Idle = SubResource( 1 )
+anims/Jump = SubResource( 4 )
+anims/Run = SubResource( 3 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 5 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -15.133 )
@@ -27,6 +124,7 @@ shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+smoothing_enabled = true
 offset_v = -1.0
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
