@@ -4,5 +4,5 @@
 
 [node name="Glock19" type="Node2D"]
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="G19 Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
