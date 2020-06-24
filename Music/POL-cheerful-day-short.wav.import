@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/POL-cheerful-day-short.wav-b9d6c1cbe931226112e0cd2aaa207564.sample"
+
+[deps]
+
+source_file="res://Music/POL-cheerful-day-short.wav"
+dest_files=[ "res://.import/POL-cheerful-day-short.wav-b9d6c1cbe931226112e0cd2aaa207564.sample" ]
+
+[params]
+
+force/8_bit=true
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop=true
+compress/mode=0
