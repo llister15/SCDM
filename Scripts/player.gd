@@ -67,8 +67,7 @@ func Gravity():
 func Shoot():
 	#var shoot_gun = Input.is_action_just_pressed("fire1")
 	var spawn_gun = Input.is_action_just_pressed("fire2")
+	var g19_Gun = g19_scene.instance()
 	if spawn_gun:
-		var g19_Gun = g19_scene.instance()
-		get_parent().add_child(g19_Gun)
-		#g19_Gun.global_position = $Sprite.global_position
-		g19_Gun.global_transform = $Sprite.global_transform
+		get_node("Sprite/Weapon equiper").add_child(g19_Gun)
+	g19_Gun.transform = $"Sprite/Weapon equiper".transform

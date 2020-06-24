@@ -1,6 +1,6 @@
 extends Area2D
 
-onready var bulletscene = preload("res://Scenes/Assets/9mm.tscn")
+onready var bulletscene = load("res://Scenes/Assets/9mm.tscn")
 
 func _ready() -> void:
 	 pass
@@ -13,4 +13,4 @@ func bullet_travel():
 	if user_shoot:
 		var bullet = bulletscene.instance()
 		get_parent().add_child(bullet)
-		bullet.global_position = $Muzzle.global_position
+		bullet.transform = $Muzzle.global_transform
