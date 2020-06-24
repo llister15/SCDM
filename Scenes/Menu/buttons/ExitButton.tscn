@@ -8,4 +8,5 @@ margin_right = 120.0
 margin_bottom = 68.0
 
 [node name="Label" parent="." index="0"]
+margin_bottom = 5.0
 text = "Exit"
