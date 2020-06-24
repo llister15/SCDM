@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/POL-cheerful-day-short.ogg-36d75c81a8f15c19d0e4e3a7165985a0.oggstr"
+
+[deps]
+
+source_file="res://Sounds/POL-cheerful-day-short.ogg"
+dest_files=[ "res://.import/POL-cheerful-day-short.ogg-36d75c81a8f15c19d0e4e3a7165985a0.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
