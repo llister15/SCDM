@@ -1,31 +1,62 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Sprites/Turtle.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/Menu/NewGame_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Menu/shellcombat-logo.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Menu/buttons/MenuButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sounds/POL-cheerful-day-short.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Scenes/Menu/buttons/ExitButton.tscn" type="PackedScene" id=4]
 
-
-
-[node name="Main Menu" type="Control"]
+[node name="TitleScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -2.10529
+margin_top = 3.1579
+margin_right = -2.10522
+margin_bottom = 3.1579
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Menu" type="VBoxContainer" parent="."]
 margin_left = 120.0
 margin_top = 80.0
-margin_right = 840.0
-margin_bottom = 480.0
+margin_right = 1320.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Title of Game" type="TextureRect" parent="Menu"]
-margin_right = 720.0
-margin_bottom = 32.0
+[node name="Logo" type="TextureRect" parent="Menu"]
+margin_right = 1200.0
+margin_bottom = 150.0
 texture = ExtResource( 1 )
-stretch_mode = 6
+stretch_mode = 4
 
-[node name="Buttons group" type="HBoxContainer" parent="Menu"]
-margin_top = 36.0
-margin_right = 720.0
-margin_bottom = 400.0
-size_flags_horizontal = 3
+[node name="CenterRow" type="HBoxContainer" parent="Menu"]
+margin_top = 154.0
+margin_right = 1200.0
+margin_bottom = 640.0
 size_flags_vertical = 3
 
-[node name="NewGame_button" parent="Menu/Buttons group" instance=ExtResource( 2 )]
+[node name="Buttons" type="VBoxContainer" parent="Menu/CenterRow"]
+margin_right = 1200.0
+margin_bottom = 486.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 5
+
+[node name="New Game" parent="Menu/CenterRow/Buttons" instance=ExtResource( 2 )]
+margin_right = 1200.0
+margin_bottom = 240.0
+size_flags_vertical = 3
+
+[node name="ExitButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 4 )]
+margin_top = 245.0
+margin_right = 1200.0
+margin_bottom = 486.0
+size_flags_vertical = 3
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
+[connection signal="pressed" from="Menu/CenterRow/Buttons/New Game" to="Menu/CenterRow/Buttons/New Game" method="_on_New_Game_pressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/ExitButton" to="Menu/CenterRow/Buttons/ExitButton" method="_on_ExitButton_pressed"]
