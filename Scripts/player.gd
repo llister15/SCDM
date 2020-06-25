@@ -19,6 +19,9 @@ onready var g19_scene = load("res://Scenes/Assets/Glock19.tscn")
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
 
+func _process(delta):
+	look_at(get_global_mouse_position())
+
 func _physics_process(delta):
 	movement()
 	Gravity()
