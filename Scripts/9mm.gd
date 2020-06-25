@@ -1,15 +1,18 @@
 extends Area2D
 
-var Speed: int = 400
-var bullet_velo = Vector2.ZERO
+export(float) var Speed = 1500
+export(float) var Damage = 25
 
-func _physics_process(delta):
-	bullet()
+var direction = 0
+
+func _ready():
+	set_as_toplevel(true)
 	
-func bullet():
-	position += transform.x * Speed * get_physics_process_delta_time()
+func _process(delta):
+	position.x += direction * Speed * delta
 
 
 
-func _on_VisibilityNotifier2D_screen_exited() -> void:
+
+func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()

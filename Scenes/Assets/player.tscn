@@ -107,6 +107,7 @@ position = Vector2( 0, -16.0084 )
 texture = ExtResource( 2 )
 vframes = 3
 hframes = 5
+frame = 1
 
 [node name="Weapon equiper" type="Node2D" parent="Sprite"]
 position = Vector2( 4.516, 0.322 )
@@ -136,3 +137,5 @@ offset_v = -1.0
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+
+[node name="Bullet_holder" type="Node2D" parent="."]

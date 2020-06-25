@@ -1,12 +1,13 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Sprites/Ammo/9mm.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Weapons/Ammo/9mm.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/9mm.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1.99537, 1.24504 )
 
 [node name="9mm" type="Area2D"]
+collision_layer = 4
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

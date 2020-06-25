@@ -45,15 +45,16 @@ size_flags_vertical = 3
 custom_constants/separation = 65
 
 [node name="New Game" parent="Menu/CenterRow/Buttons" instance=ExtResource( 2 )]
-margin_bottom = 50.0
+margin_right = 1200.0
+margin_bottom = 20.0
 size_flags_horizontal = 5
 size_flags_vertical = 5
 action_mode = 0
 
 [node name="ExitButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 4 )]
 margin_top = 85.0
-margin_right = 100.0
-margin_bottom = 135.0
+margin_right = 1200.0
+margin_bottom = 105.0
 icon = null
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]

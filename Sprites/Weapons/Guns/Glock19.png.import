@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/9mm.png-4500713c231d5ae0fa1539dba3c9df37.stex"
+path="res://.import/Glock19.png-7de4d7d5d37ec5db71cdee764ecd9548.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Ammo/9mm.png"
-dest_files=[ "res://.import/9mm.png-4500713c231d5ae0fa1539dba3c9df37.stex" ]
+source_file="res://Sprites/Weapons/Guns/Glock19.png"
+dest_files=[ "res://.import/Glock19.png-7de4d7d5d37ec5db71cdee764ecd9548.stex" ]
 
 [params]
 

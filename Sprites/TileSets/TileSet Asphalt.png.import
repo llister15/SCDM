@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Glock19.png-35557a2c8d75f87fd63850e2299cb2b5.stex"
+path="res://.import/TileSet Asphalt.png-62fc49db74390acf6afd9c61582fbe36.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Glock19.png"
-dest_files=[ "res://.import/Glock19.png-35557a2c8d75f87fd63850e2299cb2b5.stex" ]
+source_file="res://Sprites/TileSets/TileSet Asphalt.png"
+dest_files=[ "res://.import/TileSet Asphalt.png-62fc49db74390acf6afd9c61582fbe36.stex" ]
 
 [params]
 

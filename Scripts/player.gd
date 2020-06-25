@@ -9,7 +9,8 @@ export var max_speed: int = 200
 export var jump_force: int = 600
 var is_jumping: bool = false
 # Character Stats
-export var hp: int = 100
+const MAX_HP: int = 100
+export var hp: int = MAX_HP
 export var armour: int = 0
 #animation machine
 var state_machine
@@ -69,5 +70,5 @@ func Shoot():
 	var spawn_gun = Input.is_action_just_pressed("fire2")
 	var g19_Gun = g19_scene.instance()
 	if spawn_gun:
-		get_node("Sprite/Weapon equiper").add_child(g19_Gun)
-	g19_Gun.transform = $"Sprite/Weapon equiper".transform
+		$"Sprite/Weapon equiper".add_child(g19_Gun)
+		g19_Gun.position = $"Sprite/Weapon equiper".position
