@@ -6,6 +6,7 @@ var velo: Vector2 = Vector2.ZERO
 export var gravity: float = 40.0
 export var move_speed: int = 50
 export var max_speed: int = 200
+var direction_right: bool = true
 export var jump_force: int = 600
 var is_jumping: bool = false
 # Character Stats
@@ -14,18 +15,31 @@ export var hp: int = MAX_HP
 export var armour: int = 0
 #animation machine
 var state_machine
-onready var g19_scene = load("res://Scenes/Assets/Glock19.tscn")
+#loading weapons
+var g19_scene = preload("res://Scenes/Assets/Glock19.tscn")
+
+##Max values
+#var RELOAD_TIME_MAX: float = 0.5
+#var MAG_SIZE_MAX: int = 20
+#var FIRE_RATE_MAX: float = 0.5
+##varible values
+#var reload_time: float = 0.0
+#var mag_size: int = 20
+#var fire_rate: float = 0.5
+#
+#func _process(delta: float) -> void:
+#	fire_rate -= delta
+#	print(fire_rate)
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
-
-func _process(delta):
-	look_at(get_global_mouse_position())
+	pass
 
 func _physics_process(delta):
 	movement()
 	Gravity()
-	Shoot()
+	spawn_Weapon()
+	#Shoot()
 	velo = move_and_slide(velo, Vector2.UP)
 
 # Getting input from user to add and subtract velocity values
@@ -37,6 +51,7 @@ func movement():
 	var jump = Input.is_action_pressed("jump")
 	# if statements to Apply Input into movement
 	if left and !right:
+		direction_right = false
 		# Applying the user input into movement
 		if velo.x < -max_speed:
 			velo.x = -max_speed
@@ -44,6 +59,7 @@ func movement():
 			velo.x -= move_speed
 		$Sprite.scale.x = -1
 	if right and !left:
+		direction_right = true
 		if velo.x > max_speed:
 			velo.x = max_speed
 		else:
@@ -67,11 +83,11 @@ func movement():
 
 func Gravity():
 	velo.y += gravity
-	
-func Shoot():
-	#var shoot_gun = Input.is_action_just_pressed("fire1")
+
+func spawn_Weapon():
 	var spawn_gun = Input.is_action_just_pressed("fire2")
 	var g19_Gun = g19_scene.instance()
 	if spawn_gun:
-		$"Sprite/Weapon equiper".add_child(g19_Gun)
-		g19_Gun.position = $"Sprite/Weapon equiper".position
+		get_parent().add_child(g19_Gun)
+	g19_Gun.position = $"Sprite/Weapon equiper".global_position
+	g19_Gun.rotation_degrees = get_global_mouse_position().x
