@@ -110,7 +110,7 @@ hframes = 5
 frame = 1
 
 [node name="Weapon equiper" type="Node2D" parent="Sprite"]
-position = Vector2( 4.516, 0.322 )
+position = Vector2( 4.86565, 2.76954 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 1 )
@@ -130,12 +130,19 @@ shape = SubResource( 15 )
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2( 1.36, 1 )
 current = true
-zoom = Vector2( 0.8, 0.8 )
-smoothing_enabled = true
 smoothing_speed = 9.0
 offset_v = -1.0
 
+[node name="Label" type="Label" parent="Camera2D"]
+margin_left = 200.0
+margin_top = 200.0
+margin_right = 280.0
+margin_bottom = 220.0
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
-
-[node name="Bullet_holder" type="Node2D" parent="."]

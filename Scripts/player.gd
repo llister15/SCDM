@@ -6,7 +6,7 @@ var velo: Vector2 = Vector2.ZERO
 export var gravity: float = 40.0
 export var move_speed: int = 50
 export var max_speed: int = 200
-var direction_right: bool = true
+var mouseTarget: Vector2 = Vector2.ZERO
 export var jump_force: int = 600
 var is_jumping: bool = false
 # Character Stats
@@ -17,6 +17,7 @@ export var armour: int = 0
 var state_machine
 #loading weapons
 var g19_scene = preload("res://Scenes/Assets/Glock19.tscn")
+var g19_Gun = g19_scene.instance()
 
 ##Max values
 #var RELOAD_TIME_MAX: float = 0.5
@@ -39,32 +40,28 @@ func _physics_process(delta):
 	movement()
 	Gravity()
 	spawn_Weapon()
-	#Shoot()
 	velo = move_and_slide(velo, Vector2.UP)
 
 # Getting input from user to add and subtract velocity values
 func movement():
 	var _curAnim = state_machine.get_current_node()
+	mouseTarget = get_global_mouse_position() - get_global_position()
 	# Creating varibles for user Input
 	var left = Input.is_action_pressed("ui_left")
 	var right = Input.is_action_pressed("ui_right")
 	var jump = Input.is_action_pressed("jump")
 	# if statements to Apply Input into movement
 	if left and !right:
-		direction_right = false
 		# Applying the user input into movement
 		if velo.x < -max_speed:
 			velo.x = -max_speed
 		else:
 			velo.x -= move_speed
-		$Sprite.scale.x = -1
 	if right and !left:
-		direction_right = true
 		if velo.x > max_speed:
 			velo.x = max_speed
 		else:
 			velo.x += move_speed
-		$Sprite.scale.x = 1
 	elif !left and !right:
 		velo.x = 0
 	if velo.x == 0:
@@ -80,14 +77,31 @@ func movement():
 	# Setting bool is_jumping back to false
 	if !jump and is_on_floor():
 		is_jumping = false
-
+	#aiming
+	print(atan2(mouseTarget.y, mouseTarget.x))
+	if mouseTarget.x < 0:
+		$Sprite.scale.x = -1
+	else:
+		$Sprite.scale.x = 1
 func Gravity():
 	velo.y += gravity
 
 func spawn_Weapon():
 	var spawn_gun = Input.is_action_just_pressed("fire2")
-	var g19_Gun = g19_scene.instance()
+	mouseTarget = get_global_mouse_position() - get_global_position()
 	if spawn_gun:
-		get_parent().add_child(g19_Gun)
+		get_tree().get_root().add_child(g19_Gun)
 	g19_Gun.position = $"Sprite/Weapon equiper".global_position
-	g19_Gun.rotation_degrees = get_global_mouse_position().x
+	g19_Gun.rotation = atan2(mouseTarget.y, mouseTarget.x)
+#	if mouseTarget.x < 0:
+#		g19_Gun.get_node().get_child("Sprite").scale.x = -1
+#	else:
+#		g19_Gun.get_node().get_child("Sprite").scale.x = 1
+		
+	get_node("Camera2D/Label").text = str(g19_Gun.mag_size)
+	
+
+func equip_Weapon():
+	var equip = Input.is_action_just_pressed("Interact")
+	if collision_mask == 1:
+		get_node_or_null("g19_Gun").position = $"Sprite/Weapon equiper".global_position
