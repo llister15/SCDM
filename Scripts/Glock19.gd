@@ -3,14 +3,18 @@ extends RigidBody2D
 #Max values
 var RELOAD_TIME_MAX: float = 0.5
 var MAG_SIZE_MAX: int = 10
-var FIRE_RATE_MAX: float = 0.2
+var FIRE_RATE_MAX: float = 0.1
 #varible values
 var reload_time: float = RELOAD_TIME_MAX
 var mag_size: int = MAG_SIZE_MAX
 var fire_rate: float = FIRE_RATE_MAX
-var bulletSpeed: float = 10.0
+var bulletSpeed: float = 50.0
 
 var mouseTarget: Vector2 = Vector2.ZERO
+var mouseDirection: float = 0
+
+
+
 
 #preload ammo
 var bullet_scene = preload("res://Scenes/Assets/9mm.tscn")
@@ -28,7 +32,10 @@ func Shoot():
 	var bullet_rotation = get_angle_to(get_global_mouse_position()) + self.get_rotation()
 	bullet_instance.set_rotation(bullet_rotation)
 	bullet_instance.set_position(self.global_position)
-	mouseTarget = get_global_mouse_position() - get_global_position()
+	mouseTarget = get_global_mouse_position() - $"Muzzle Position".global_position
+	
+#	print(str(Vector2($"Muzzle Position".global_position)))
+	print(get_global_mouse_position() - $"Muzzle Position".global_position)
 	
 	if shoot_gun:
 		if fire_rate <= 0 and mag_size > 0:
@@ -37,7 +44,8 @@ func Shoot():
 			get_tree().get_root().add_child(bullet_instance)
 			bullet_instance.position = $"Muzzle Position".global_position
 			bullet_instance.rotation = $"Muzzle Position".global_rotation
-			bullet_instance.apply_impulse(Vector2(),Vector2(mouseTarget.x * bulletSpeed, mouseTarget.y * bulletSpeed))
+			bullet_instance.apply_impulse(Vector2(), Vector2(get_global_mouse_position() - $"Muzzle Position".global_position))
+			
 		
 	if reload:
 		mag_size = MAG_SIZE_MAX

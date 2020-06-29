@@ -78,7 +78,7 @@ func movement():
 	if !jump and is_on_floor():
 		is_jumping = false
 	#aiming
-	print(atan2(mouseTarget.y, mouseTarget.x))
+	#print(atan2(mouseTarget.y, mouseTarget.x))
 	if mouseTarget.x < 0:
 		$Sprite.scale.x = -1
 	else:
@@ -93,11 +93,6 @@ func spawn_Weapon():
 		get_tree().get_root().add_child(g19_Gun)
 	g19_Gun.position = $"Sprite/Weapon equiper".global_position
 	g19_Gun.rotation = atan2(mouseTarget.y, mouseTarget.x)
-#	if mouseTarget.x < 0:
-#		g19_Gun.get_node().get_child("Sprite").scale.x = -1
-#	else:
-#		g19_Gun.get_node().get_child("Sprite").scale.x = 1
-		
 	get_node("Camera2D/Label").text = str(g19_Gun.mag_size)
 	
 
