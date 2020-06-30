@@ -8,7 +8,7 @@ var FIRE_RATE_MAX: float = 0.1
 var reload_time: float = RELOAD_TIME_MAX
 var mag_size: int = MAG_SIZE_MAX
 var fire_rate: float = FIRE_RATE_MAX
-var bulletSpeed: float = 50.0
+var bulletSpeed: float = 1200.0
 
 var mouseTarget: Vector2 = Vector2.ZERO
 var mouseDirection: float = 0
@@ -35,7 +35,7 @@ func Shoot():
 	mouseTarget = get_global_mouse_position() - $"Muzzle Position".global_position
 	
 #	print(str(Vector2($"Muzzle Position".global_position)))
-	print(get_global_mouse_position() - $"Muzzle Position".global_position)
+	print(mouseTarget.normalized())
 	
 	if shoot_gun:
 		if fire_rate <= 0 and mag_size > 0:
@@ -43,8 +43,8 @@ func Shoot():
 			mag_size -= 1
 			get_tree().get_root().add_child(bullet_instance)
 			bullet_instance.position = $"Muzzle Position".global_position
-			bullet_instance.rotation = $"Muzzle Position".global_rotation
-			bullet_instance.apply_impulse(Vector2(), Vector2(get_global_mouse_position() - $"Muzzle Position".global_position))
+			bullet_instance.rotation = $"Muzzle Position".global_rotation 
+			bullet_instance.apply_impulse(Vector2(), Vector2(mouseTarget.normalized().x * bulletSpeed, mouseTarget.normalized().y * bulletSpeed))
 			
 		
 	if reload:
