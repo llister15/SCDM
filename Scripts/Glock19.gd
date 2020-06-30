@@ -2,7 +2,7 @@ extends RigidBody2D
 
 #Max values
 var RELOAD_TIME_MAX: float = 0.5
-var MAG_SIZE_MAX: int = 10
+var MAG_SIZE_MAX: int = 15
 var FIRE_RATE_MAX: float = 0.1
 #varible values
 var reload_time: float = RELOAD_TIME_MAX
@@ -26,7 +26,7 @@ func _physics_process(delta):
 		fire_rate = 0
 
 func Shoot():
-	var shoot_gun = Input.is_action_pressed("fire1")
+	var shoot_gun = Input.is_action_just_pressed("fire1")
 	var reload = Input.is_action_just_pressed("Reload")
 	var bullet_instance = bullet_scene.instance()
 	var bullet_rotation = get_angle_to(get_global_mouse_position()) + self.get_rotation()
