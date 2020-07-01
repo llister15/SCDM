@@ -12,29 +12,18 @@ var is_jumping: bool = false
 # Character Stats
 const MAX_HP: int = 100
 export var hp: int = MAX_HP
-export var armour: int = 0
+const MAX_ARMOUR: int = 50
+export var armour: int = MAX_ARMOUR
 #animation machine
 var state_machine
 #loading weapons
 var g19_scene = preload("res://Scenes/Assets/Glock19.tscn")
 var g19_Gun = g19_scene.instance()
-
-##Max values
-#var RELOAD_TIME_MAX: float = 0.5
-#var MAG_SIZE_MAX: int = 20
-#var FIRE_RATE_MAX: float = 0.5
-##varible values
-#var reload_time: float = 0.0
-#var mag_size: int = 20
-#var fire_rate: float = 0.5
-#
-#func _process(delta: float) -> void:
-#	fire_rate -= delta
-#	print(fire_rate)
+var weapon_equiped: bool = false
+var weapon_equiperoffset
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
-	pass
 
 func _physics_process(delta):
 	movement()
@@ -88,13 +77,23 @@ func Gravity():
 
 func spawn_Weapon():
 	var spawn_gun = Input.is_action_just_pressed("fire2")
-	mouseTarget = get_global_mouse_position() - get_global_position()
+	mouseTarget = get_global_mouse_position() - $"Sprite/Weapon equiper".global_position
+	weapon_equiperoffset = get_global_mouse_position() - $"Sprite/Weapon equiper".global_position
+	weapon_equiperoffset = weapon_equiperoffset.normalized() * 10
+	print(atan2(mouseTarget.y, mouseTarget.x))
 	if spawn_gun:
-		get_tree().get_root().add_child(g19_Gun)
-	g19_Gun.position = $"Sprite/Weapon equiper".global_position
-	g19_Gun.rotation = atan2(mouseTarget.y, mouseTarget.x)
-	get_node("Camera2D/Label").text = str(g19_Gun.mag_size)
-	
+		get_node("Sprite/Weapon equiper").add_child(g19_Gun)
+
+	if mouseTarget.x < 0:
+		g19_Gun.position = $"Sprite/Weapon equiper".position - weapon_equiperoffset
+		g19_Gun.get_node("Muzzle Position").position.x = -9.6
+		g19_Gun.get_node("Sprite").set_flip_h(true)
+#		g19_Gun.rotation = 
+	else:
+		g19_Gun.position = $"Sprite/Weapon equiper".position + weapon_equiperoffset
+		g19_Gun.get_node("Muzzle Position").position.x = 9.6
+		g19_Gun.get_node("Sprite").set_flip_h(false)
+		g19_Gun.rotation = atan2(mouseTarget.y, mouseTarget.x)
 
 func equip_Weapon():
 	var equip = Input.is_action_just_pressed("Interact")

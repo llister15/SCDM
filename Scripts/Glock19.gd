@@ -29,14 +29,12 @@ func Shoot():
 	var shoot_gun = Input.is_action_just_pressed("fire1")
 	var reload = Input.is_action_just_pressed("Reload")
 	var bullet_instance = bullet_scene.instance()
-	var bullet_rotation = get_angle_to(get_global_mouse_position()) + self.get_rotation()
-	bullet_instance.set_rotation(bullet_rotation)
-	bullet_instance.set_position(self.global_position)
 	mouseTarget = get_global_mouse_position() - $"Muzzle Position".global_position
-	
-#	print(str(Vector2($"Muzzle Position".global_position)))
-	print(mouseTarget.normalized())
-	
+	#print(mouseTarget)
+#	if mouseTarget.x > 0:
+#		$"Muzzle Position".position = $"Muzzle Position".global_position
+#	else:
+#		$"Muzzle Position".position = $"Muzzle Position".position
 	if shoot_gun:
 		if fire_rate <= 0 and mag_size > 0:
 			fire_rate = FIRE_RATE_MAX
@@ -48,4 +46,5 @@ func Shoot():
 			
 		
 	if reload:
+		yield(get_tree().create_timer(RELOAD_TIME_MAX), "timeout")
 		mag_size = MAG_SIZE_MAX
