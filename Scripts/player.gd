@@ -14,9 +14,12 @@ const MAX_HP: int = 100
 export var hp: int = MAX_HP
 const MAX_ARMOUR: int = 50
 export var armour: int = MAX_ARMOUR
+#Loading HUD
+var HUD_scene = preload("res://Scenes/Assets/HUD.tscn")
+var HUD_display = HUD_scene.instance()
 #animation machine
 var state_machine
-#loading weapons
+#Loading weapons
 var g19_scene = preload("res://Scenes/Assets/Glock19.tscn")
 var g19_Gun = g19_scene.instance()
 var weapon_equiped: bool = false
@@ -24,16 +27,19 @@ var weapon_equiperoffset
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
+	$"Camera2D".add_child(HUD_display)
+	HUD_display.get_node("CanvasLayer/Character_stats/Health Bar").value = MAX_HP
+	
 
 func _physics_process(delta):
 	movement()
 	Gravity()
+	Health()
 	spawn_Weapon()
 	velo = move_and_slide(velo, Vector2.UP)
 
 # Getting input from user to add and subtract velocity values
 func movement():
-	var _curAnim = state_machine.get_current_node()
 	mouseTarget = get_global_mouse_position() - get_global_position()
 	# Creating varibles for user Input
 	var left = Input.is_action_pressed("ui_left")
@@ -75,6 +81,10 @@ func movement():
 func Gravity():
 	velo.y += gravity
 
+func Health():
+	if hp <= 0:
+		queue_free()
+
 func spawn_Weapon():
 	var spawn_gun = Input.is_action_just_pressed("fire2")
 	mouseTarget = get_global_mouse_position() - $"Sprite/Weapon equiper".global_position
@@ -83,17 +93,17 @@ func spawn_Weapon():
 	print(atan2(mouseTarget.y, mouseTarget.x))
 	if spawn_gun:
 		get_node("Sprite/Weapon equiper").add_child(g19_Gun)
-
 	if mouseTarget.x < 0:
 		g19_Gun.position = $"Sprite/Weapon equiper".position - weapon_equiperoffset
 		g19_Gun.get_node("Muzzle Position").position.x = -9.6
-		g19_Gun.get_node("Sprite").set_flip_h(true)
-#		g19_Gun.rotation = 
+		g19_Gun.get_node("Sprite").set_flip_v(true)
+		g19_Gun.rotation = atan2(-mouseTarget.y, -mouseTarget.x)
 	else:
 		g19_Gun.position = $"Sprite/Weapon equiper".position + weapon_equiperoffset
 		g19_Gun.get_node("Muzzle Position").position.x = 9.6
-		g19_Gun.get_node("Sprite").set_flip_h(false)
+		g19_Gun.get_node("Sprite").set_flip_v(false)
 		g19_Gun.rotation = atan2(mouseTarget.y, mouseTarget.x)
+	HUD_display.get_node("CanvasLayer/Weapon_ui/Ammo_Label").text = str(g19_Gun.mag_size)
 
 func equip_Weapon():
 	var equip = Input.is_action_just_pressed("Interact")
