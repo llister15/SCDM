@@ -8,7 +8,7 @@ var FIRE_RATE_MAX: float = 0.1
 var reload_time: float = RELOAD_TIME_MAX
 var mag_size: int = MAG_SIZE_MAX
 var fire_rate: float = FIRE_RATE_MAX
-var bulletSpeed: float = 1200.0
+var bulletSpeed: float = 4000.0
 var is_reloading: bool = false
 var Damage: int = 0
 
