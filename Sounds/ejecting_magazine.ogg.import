@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ejecting_magazine.ogg-0195866961960f3aa83418f62b60cc98.oggstr"
+
+[deps]
+
+source_file="res://Sounds/ejecting_magazine.ogg"
+dest_files=[ "res://.import/ejecting_magazine.ogg-0195866961960f3aa83418f62b60cc98.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
