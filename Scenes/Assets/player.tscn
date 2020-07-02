@@ -99,7 +99,7 @@ graph_offset = Vector2( 13, 91 )
 extents = Vector2( 9.7989, 15.077 )
 
 [node name="Player" type="KinematicBody2D"]
-collision_mask = 8
+collision_mask = 14
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -107,10 +107,10 @@ position = Vector2( 0, -16.0084 )
 texture = ExtResource( 2 )
 vframes = 3
 hframes = 5
-frame = 1
+frame = 2
 
 [node name="Weapon equiper" type="Node2D" parent="Sprite"]
-position = Vector2( 4.516, 0.322 )
+position = Vector2( 1.05293, 0.8754 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 1 )
@@ -127,15 +127,10 @@ parameters/playback = SubResource( 14 )
 position = Vector2( 1.05293, -15.133 )
 shape = SubResource( 15 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2( 1.36, 1 )
-current = true
-zoom = Vector2( 0.8, 0.8 )
-smoothing_enabled = true
-smoothing_speed = 9.0
-offset_v = -1.0
-
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 
-[node name="Bullet_holder" type="Node2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+smoothing_enabled = true
+smoothing_speed = 8.0
