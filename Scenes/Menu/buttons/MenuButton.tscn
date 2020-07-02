@@ -6,8 +6,9 @@
 [sub_resource type="AnimatedTexture" id=1]
 
 [node name="NewGame" type="Button"]
-margin_right = 250.0
-margin_bottom = 51.0
+margin_left = 18.0
+margin_right = 255.0
+margin_bottom = 52.0
 icon = SubResource( 1 )
 flat = true
 script = ExtResource( 2 )

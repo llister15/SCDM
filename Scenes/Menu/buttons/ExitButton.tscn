@@ -3,9 +3,7 @@
 [ext_resource path="res://Scenes/Menu/buttons/MenuButton.tscn" type="PackedScene" id=1]
 
 [node name="ExitButton" instance=ExtResource( 1 )]
-margin_top = 25.0
-margin_right = 120.0
-margin_bottom = 68.0
+margin_right = 111.0
 
 [node name="Label" parent="." index="0"]
 margin_bottom = 5.0

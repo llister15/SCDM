@@ -89,19 +89,19 @@ func spawn_Weapon():
 	var spawn_gun = Input.is_action_just_pressed("fire2")
 	mouseTarget = get_global_mouse_position() - $"Sprite/Weapon equiper".global_position
 	weapon_equiperoffset = get_global_mouse_position() - $"Sprite/Weapon equiper".global_position
-	weapon_equiperoffset = weapon_equiperoffset.normalized() * 10
-	print(atan2(mouseTarget.y, mouseTarget.x))
+	weapon_equiperoffset = weapon_equiperoffset.normalized() * 15
+	print(g19_Gun.position)
 	if spawn_gun:
 		get_node("Sprite/Weapon equiper").add_child(g19_Gun)
 	if mouseTarget.x < 0:
 		g19_Gun.position = $"Sprite/Weapon equiper".position - weapon_equiperoffset
 		g19_Gun.get_node("Muzzle Position").position.x = -9.6
-		g19_Gun.get_node("Sprite").set_flip_v(true)
-		g19_Gun.rotation = atan2(-mouseTarget.y, -mouseTarget.x)
+		g19_Gun.get_node("Sprite").set_flip_h(true)
+		g19_Gun.rotation = -atan2(mouseTarget.y, mouseTarget.x)
 	else:
 		g19_Gun.position = $"Sprite/Weapon equiper".position + weapon_equiperoffset
 		g19_Gun.get_node("Muzzle Position").position.x = 9.6
-		g19_Gun.get_node("Sprite").set_flip_v(false)
+		g19_Gun.get_node("Sprite").set_flip_h(false)
 		g19_Gun.rotation = atan2(mouseTarget.y, mouseTarget.x)
 	HUD_display.get_node("CanvasLayer/Weapon_ui/Ammo_Label").text = str(g19_Gun.mag_size)
 
