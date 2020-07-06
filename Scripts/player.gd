@@ -70,10 +70,9 @@ func movement():
 		state_machine.travel('Jump')
 		$JumpSound.play()
 	# Setting bool is_jumping back to false
-	if !jump and is_on_floor():
+	if !jump or is_on_floor():
 		is_jumping = false
-	#aiming
-	#print(atan2(mouseTarget.y, mouseTarget.x))
+	#flipping the sprite to look in the correct direction
 	if mouseTarget.x < 0:
 		$Sprite.scale.x = -1
 	else:
@@ -89,7 +88,7 @@ func spawn_Weapon():
 	var spawn_gun = Input.is_action_just_pressed("fire2")
 	mouseTarget = get_global_mouse_position() - $"Sprite/Weapon equiper".global_position
 	weapon_equiperoffset = get_global_mouse_position() - $"Sprite/Weapon equiper".global_position
-	weapon_equiperoffset = weapon_equiperoffset.normalized() * 15
+	weapon_equiperoffset = weapon_equiperoffset.normalized() * 5
 	print(g19_Gun.position)
 	if spawn_gun:
 		get_node("Sprite/Weapon equiper").add_child(g19_Gun)

@@ -2,7 +2,7 @@ extends RigidBody2D
 
 #Max values
 var RELOAD_TIME_MAX: float = 1.0
-var MAG_SIZE_MAX: int = 5
+var MAG_SIZE_MAX: int = 15
 var FIRE_RATE_MAX: float = 0.1
 #varible values
 var reload_time: float = RELOAD_TIME_MAX
@@ -49,14 +49,18 @@ func Reload():
 		$"ejecting_magazine".play()
 		yield(get_tree().create_timer(RELOAD_TIME_MAX), "timeout")
 		$"pop_clip_in".play()
+		yield(get_tree().create_timer(RELOAD_TIME_MAX / 5), "timeout")
 		mag_size = MAG_SIZE_MAX
 		is_reloading = false
-	if mag_size <= 0 and is_reloading == false:
-		is_reloading = true
-		$"ejecting_magazine".play()
-		yield(get_tree().create_timer(RELOAD_TIME_MAX), "timeout")
-		$"pop_clip_in".play()
-		mag_size = MAG_SIZE_MAX
-		is_reloading = false
+#	if mag_size <= 0 and is_reloading == false:
+#		is_reloading = true
+#		$"ejecting_magazine".play()
+#		yield(get_tree().create_timer(RELOAD_TIME_MAX), "timeout")
+#		$"pop_clip_in".play()
+#		yield(get_tree().create_timer(RELOAD_TIME_MAX / 5), "timeout")
+#		mag_size = MAG_SIZE_MAX
+#		is_reloading = false
 	if is_reloading == true and Input.is_action_just_pressed("fire1"):
+		$"dry_fire".play()
+	elif mag_size <= 0 and Input.is_action_just_pressed("fire1"):
 		$"dry_fire".play()
