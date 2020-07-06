@@ -94,7 +94,7 @@ func spawn_Weapon():
 	if spawn_gun:
 		get_node("Sprite/Weapon equiper").add_child(g19_Gun)
 	if mouseTarget.x < 0:
-		g19_Gun.position = $"Sprite/Weapon equiper".position - weapon_equiperoffset
+		g19_Gun.position = $"Sprite/Weapon equiper".position - Vector2(weapon_equiperoffset.x, -weapon_equiperoffset.y)
 		g19_Gun.get_node("Muzzle Position").position.x = -9.6
 		g19_Gun.get_node("Sprite").set_flip_h(true)
 		g19_Gun.rotation = -atan2(mouseTarget.y, mouseTarget.x)

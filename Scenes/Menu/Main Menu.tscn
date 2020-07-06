@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/Menu/buttons/NewGame.gd" type="Script" id=2]
 [ext_resource path="res://Sounds/POL-cheerful-day-short.ogg" type="AudioStream" id=3]
 [ext_resource path="res://Fonts/Orange Juice.otf" type="DynamicFontData" id=4]
-[ext_resource path="res://Sprites/bg_Sky.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Background_skyxcf.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -22,10 +22,10 @@ __meta__ = {
 }
 
 [node name="Button" type="Button" parent="."]
-margin_left = 67.0
-margin_top = 268.148
-margin_right = 245.0
-margin_bottom = 328.0
+margin_left = 64.0
+margin_top = 337.962
+margin_right = 242.0
+margin_bottom = 397.814
 align = 0
 script = ExtResource( 2 )
 __meta__ = {
@@ -52,8 +52,8 @@ stream = ExtResource( 3 )
 autoplay = true
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 509.323, 291.948 )
-scale = Vector2( 1.1, 1.1 )
+position = Vector2( 509.323, 269.734 )
+scale = Vector2( 4.17419, 4.17419 )
 z_index = -1
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 [connection signal="button_down" from="Button" to="Button" method="_on_Button_button_down"]
