@@ -39,6 +39,8 @@ func Shoot():
 			bullet_instance.position = $"Muzzle Position".global_position
 			bullet_instance.rotation = $"Muzzle Position".global_rotation 
 			bullet_instance.apply_impulse(Vector2(), Vector2(mouseTarget.normalized().x * bulletSpeed, mouseTarget.normalized().y * bulletSpeed))
+			$"Muzzle Position/Particles2D".set_emitting(true)
+			
 	
 
 func Reload():
