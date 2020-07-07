@@ -107,7 +107,7 @@ position = Vector2( 0, -16.0084 )
 texture = ExtResource( 2 )
 vframes = 3
 hframes = 5
-frame = 1
+frame = 2
 
 [node name="Weapon equiper" type="Node2D" parent="Sprite"]
 position = Vector2( 1.05293, 0.8754 )

@@ -103,6 +103,8 @@ func spawn_Weapon():
 		g19_Gun.get_node("Sprite").set_flip_h(false)
 		g19_Gun.rotation = atan2(mouseTarget.y, mouseTarget.x)
 	HUD_display.get_node("CanvasLayer/Weapon_ui/Ammo_Label").text = str(g19_Gun.mag_size)
+	if g19_Gun.mag_size <= 0:
+		HUD_display.get_node("CanvasLayer/Weapon_ui/Ammo_Label").text = str("Press R to Reload")
 
 func equip_Weapon():
 	var equip = Input.is_action_just_pressed("Interact")

@@ -1,14 +1,14 @@
 extends RigidBody2D
 
 #Max values
-var RELOAD_TIME_MAX: float = 1.0
+var RELOAD_TIME_MAX: float = 0.5
 var MAG_SIZE_MAX: int = 15
 var FIRE_RATE_MAX: float = 0.1
 #varible values
 var reload_time: float = RELOAD_TIME_MAX
 var mag_size: int = MAG_SIZE_MAX
 var fire_rate: float = FIRE_RATE_MAX
-var bulletSpeed: float = 1000.0
+var bulletSpeed: float = 500.0
 var is_reloading: bool = false
 var Damage: int = 0
 
@@ -37,7 +37,7 @@ func Shoot():
 			mag_size -= 1
 			get_tree().get_root().add_child(bullet_instance)
 			bullet_instance.position = $"Muzzle Position".global_position
-			bullet_instance.rotation = $"Muzzle Position".global_rotation 
+			bullet_instance.rotation = $"Muzzle Position".global_rotation
 			bullet_instance.apply_impulse(Vector2(), Vector2(mouseTarget.normalized().x * bulletSpeed, mouseTarget.normalized().y * bulletSpeed))
 			$"Muzzle Position/Particles2D".set_emitting(true)
 			
