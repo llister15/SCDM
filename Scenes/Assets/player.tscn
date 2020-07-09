@@ -96,7 +96,7 @@ graph_offset = Vector2( 13, 91 )
 [sub_resource type="AnimationNodeStateMachinePlayback" id=14]
 
 [sub_resource type="RectangleShape2D" id=15]
-extents = Vector2( 9.7989, 15.077 )
+extents = Vector2( 6.64829, 15.289 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 14

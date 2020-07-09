@@ -8,7 +8,7 @@ var FIRE_RATE_MAX: float = 0.1
 var reload_time: float = RELOAD_TIME_MAX
 var mag_size: int = MAG_SIZE_MAX
 var fire_rate: float = FIRE_RATE_MAX
-var bulletSpeed: float = 500.0
+var bulletSpeed: float = 2000.0
 var is_reloading: bool = false
 var Damage: int = 0
 
@@ -33,19 +33,22 @@ func Shoot():
 	if shoot_gun and is_reloading == false:
 		if fire_rate <= 0 and mag_size > 0:
 			$"9mm_shot".play()
+			$"Muzzle Position/Particles2D".set_emitting(true)
 			fire_rate = FIRE_RATE_MAX
 			mag_size -= 1
 			get_tree().get_root().add_child(bullet_instance)
 			bullet_instance.position = $"Muzzle Position".global_position
-			bullet_instance.rotation = $"Muzzle Position".global_rotation
+			if mouseTarget.x < 0:
+				bullet_instance.get_node("Sprite").set_flip_h(true)
+				bullet_instance.rotation = $"Muzzle Position".global_rotation
+			if mouseTarget.x > 0:
+				bullet_instance.get_node("Sprite").set_flip_h(false)
+				bullet_instance.rotation = $"Muzzle Position".global_rotation
 			bullet_instance.apply_impulse(Vector2(), Vector2(mouseTarget.normalized().x * bulletSpeed, mouseTarget.normalized().y * bulletSpeed))
-			$"Muzzle Position/Particles2D".set_emitting(true)
 			
-	
 
 func Reload():
 	var reload = Input.is_action_just_pressed("Reload")
-	print(is_reloading)
 	if reload and mag_size < MAG_SIZE_MAX:
 		is_reloading = true
 		$"ejecting_magazine".play()

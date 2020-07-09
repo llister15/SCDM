@@ -3,12 +3,14 @@ extends KinematicBody2D
 export var name_of_char: String = "Turtle1"
 # Character movement
 var velo: Vector2 = Vector2.ZERO
-export var gravity: float = 40.0
-export var move_speed: int = 50
-export var max_speed: int = 200
-var mouseTarget: Vector2 = Vector2.ZERO
-export var jump_force: int = 600
+export var move_speed: int = 25
+export var max_speed: int = 125
+export var gravity: float = 25.0
+export var jump_force: int = 380
+export var jump_height: int = 25
+export var jump_count: int = 0
 var is_jumping: bool = false
+var mouseTarget: Vector2 = Vector2.ZERO
 # Character Stats
 const MAX_HP: int = 100
 export var hp: int = MAX_HP
@@ -44,7 +46,7 @@ func movement():
 	# Creating varibles for user Input
 	var left = Input.is_action_pressed("ui_left")
 	var right = Input.is_action_pressed("ui_right")
-	var jump = Input.is_action_pressed("jump")
+	var jump = Input.is_action_just_pressed("jump")
 	# if statements to Apply Input into movement
 	if left and !right:
 		# Applying the user input into movement
@@ -58,25 +60,31 @@ func movement():
 		else:
 			velo.x += move_speed
 	elif !left and !right:
-		velo.x = 0
-	if velo.x == 0:
+		velo.x = lerp(velo.x, 0, 0.25)
+	if velo.x > -10 or velo.x < 10:
 		state_machine.travel('Idle')
-	if velo.x != 0:
+	if velo.x < -10 or velo.x > 10:
 		state_machine.travel('Run')
 	#jumping Section
-	if jump and is_on_floor():
-		is_jumping = true
-		velo.y -= jump_force
-		state_machine.travel('Jump')
-		$JumpSound.play()
+	if jump:
+		if jump_count < 2:
+			jump_count += 1
+			is_jumping = true
+			velo.y = 0
+			velo.y -= jump_force
+			state_machine.travel('Jump')
+			$JumpSound.play()
 	# Setting bool is_jumping back to false
-	if !jump or is_on_floor():
+	if !jump and is_on_floor():
 		is_jumping = false
+		jump_count = 0
 	#flipping the sprite to look in the correct direction
 	if mouseTarget.x < 0:
 		$Sprite.scale.x = -1
 	else:
 		$Sprite.scale.x = 1
+
+
 func Gravity():
 	velo.y += gravity
 
@@ -88,8 +96,7 @@ func spawn_Weapon():
 	var spawn_gun = Input.is_action_just_pressed("fire2")
 	mouseTarget = get_global_mouse_position() - $"Sprite/Weapon equiper".global_position
 	weapon_equiperoffset = get_global_mouse_position() - $"Sprite/Weapon equiper".global_position
-	weapon_equiperoffset = weapon_equiperoffset.normalized() * 5
-	print(g19_Gun.position)
+	weapon_equiperoffset = weapon_equiperoffset.normalized() * 8
 	if spawn_gun:
 		get_node("Sprite/Weapon equiper").add_child(g19_Gun)
 	if mouseTarget.x < 0:

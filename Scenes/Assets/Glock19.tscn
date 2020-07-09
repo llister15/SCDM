@@ -11,19 +11,19 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.43166, 4.00765 )
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 0.942871, 0.942871, 0.942871, 1, 1, 1, 1, 0.203922 )
 
-[sub_resource type="GradientTexture" id=6]
-gradient = SubResource( 5 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.751351, 0.818182 ), 0.0, 0.0, 0, 0, Vector2( 0.994595, 0.636364 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=6]
 lifetime_randomness = 0.13
 emission_shape = 2
 emission_box_extents = Vector3( 1, 1, 1 )
@@ -34,8 +34,8 @@ initial_velocity = 5.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.02
-scale_curve = SubResource( 4 )
-color_ramp = SubResource( 6 )
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
 
 [node name="Glock 19" type="RigidBody2D"]
 collision_layer = 4
@@ -52,11 +52,11 @@ z_index = 1
 texture = ExtResource( 1 )
 
 [node name="Muzzle Position" type="Node2D" parent="."]
-position = Vector2( 9.60031, -1.54426 )
+position = Vector2( 7.22894, -1.54426 )
 
 [node name="Particles2D" type="Particles2D" parent="Muzzle Position"]
 show_behind_parent = true
-position = Vector2( -1.60031, 0 )
+position = Vector2( -1.19209e-07, 0 )
 emitting = false
 amount = 2
 lifetime = 0.1
@@ -64,7 +64,7 @@ one_shot = true
 speed_scale = 1.5
 explosiveness = 1.0
 local_coords = false
-process_material = SubResource( 2 )
+process_material = SubResource( 6 )
 texture = ExtResource( 7 )
 
 [node name="9mm_shot" type="AudioStreamPlayer2D" parent="."]
