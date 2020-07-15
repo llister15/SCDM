@@ -24,6 +24,10 @@ config/icon="res://Sprites/icon.png"
 config/macos_native_icon="res://Sprites/icon.png"
 config/windows_native_icon="res://Sprites/icon.png"
 
+[debug]
+
+settings/stdout/print_fps=true
+
 [display]
 
 window/size/fullscreen=true

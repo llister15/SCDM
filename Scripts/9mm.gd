@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var bullet_timer: float = 3.0
+var bullet_timer: float = 2.0
 
 func _physics_process(delta):
 	pass

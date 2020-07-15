@@ -1,25 +1,26 @@
 extends RigidBody2D
 
-#Max values
+# Max values |||||||||||||||||||
 var RELOAD_TIME_MAX: float = 0.5
 var MAG_SIZE_MAX: int = 15
-var FIRE_RATE_MAX: float = 0.1
-#varible values
-var reload_time: float = RELOAD_TIME_MAX
+var FIRE_RATE_MAX: float = 0.01
+# varible values |||||||||||||||||||
 var mag_size: int = MAG_SIZE_MAX
 var fire_rate: float = FIRE_RATE_MAX
-var bulletSpeed: float = 2000.0
+var bulletSpeed: float = 1500.0
 var is_reloading: bool = false
-var Damage: int = 0
-
+var Damage: int = 25
+# equipping |||||||||||||||||||
+var is_equiped: bool = false
+# point to cursor |||||||||||||||||||
 var mouseTarget: Vector2 = Vector2.ZERO
 var mouseDirection: float = 0
 
-#preload ammo
+# preload ammo |||||||||||||||||||
 var bullet_scene = preload("res://Scenes/Assets/9mm.tscn")
 
 
-func _physics_process(delta):
+func _process(delta):
 	Shoot()
 	Reload()
 	fire_rate -= delta
@@ -30,7 +31,7 @@ func Shoot():
 	var shoot_gun = Input.is_action_just_pressed("fire1")
 	var bullet_instance = bullet_scene.instance()
 	mouseTarget = get_global_mouse_position() - $"Muzzle Position".global_position
-	if shoot_gun and is_reloading == false:
+	if shoot_gun and is_reloading == false and is_equiped == true:
 		if fire_rate <= 0 and mag_size > 0:
 			$"9mm_shot".play()
 			$"Muzzle Position/Particles2D".set_emitting(true)
@@ -49,7 +50,7 @@ func Shoot():
 
 func Reload():
 	var reload = Input.is_action_just_pressed("Reload")
-	if reload and mag_size < MAG_SIZE_MAX:
+	if reload and mag_size < MAG_SIZE_MAX and is_equiped == true:
 		is_reloading = true
 		$"ejecting_magazine".play()
 		yield(get_tree().create_timer(RELOAD_TIME_MAX), "timeout")
@@ -69,3 +70,9 @@ func Reload():
 		$"dry_fire".play()
 	elif mag_size <= 0 and Input.is_action_just_pressed("fire1"):
 		$"dry_fire".play()
+
+
+#func _on_Equip_Area_body_entered(body):
+#	if body.name == "Player" and is_equiped == false:
+#		queue_free()
+#	print(is_equiped)

@@ -1,7 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/Menu/DyFront.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Scenes/Menu/buttons/NewGame.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/NewGame.gd" type="Script" id=2]
+
 
 [sub_resource type="AnimatedTexture" id=1]
 

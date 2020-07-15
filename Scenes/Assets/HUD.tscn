@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Fonts/Orange Juice.otf" type="DynamicFontData" id=1]
-[ext_resource path="res://Sprites/Weapons/Guns/Glock19.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Weapons/Guns/shotgun.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/HUD/HealthBarinside.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/HUD/HealthBar.png" type="Texture" id=4]
 
@@ -23,14 +23,15 @@ __meta__ = {
 
 [node name="Gun_Type" type="TextureRect" parent="CanvasLayer/Weapon_ui"]
 margin_right = 32.0
-margin_bottom = 32.0
+margin_bottom = 24.0
+grow_horizontal = 0
+grow_vertical = 0
 texture = ExtResource( 2 )
 
 [node name="Ammo_Label" type="Label" parent="CanvasLayer/Weapon_ui"]
 margin_left = 36.0
-margin_top = 4.0
 margin_right = 90.0
-margin_bottom = 28.0
+margin_bottom = 24.0
 custom_fonts/font = SubResource( 1 )
 text = "Default"
 valign = 1
